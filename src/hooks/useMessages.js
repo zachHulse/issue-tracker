@@ -11,7 +11,7 @@ const setMessages = (newMessages) => {
 };
 
 export const addMessage = (text, type = constants.MESSAGE_TYPE_INFO) => {
-  setMessages({ ...messages, text: type });
+  setMessages({ ...messages, [text]: type });
 };
 
 const removeMessage = (text) => {
