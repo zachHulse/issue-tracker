@@ -15,13 +15,8 @@ const login = async (credentials) => {
 export default function useLogin() {
   return useMutation(login, {
     onSuccess: async (data, variables) => {
-      await localStorage.setItem(
-        'session',
-        JSON.stringify({
-          email: variables.email,
-          token: data.token,
-        }),
-      );
+      await localStorage.setItem('token', data.token);
+      await localStorage.setItem('email', variables.email);
     },
     onError: () => {
       addMessage('Login failed, please try again.', constants.MESSAGE_TYPE_ERROR);
