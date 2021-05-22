@@ -2,6 +2,11 @@ import axios from 'axios';
 
 import * as constants from '../../constants';
 
-export default async function request(urlPartial, init) {
-  return axios({ url: constants.API_URL + urlPartial, ...init });
-}
+const request = async (urlPartial, init) => {
+  const token = localStorage.getItem('token');
+  const initial = { headers: {}, ...init };
+  initial.headers.authorization = token;
+  return axios({ url: constants.API_URL + urlPartial, ...initial });
+};
+
+export default request;
