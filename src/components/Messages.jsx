@@ -39,6 +39,7 @@ const Messages = () => {
             horizontal: 'center',
           }}
           open
+          autoHideDuration={5000}
           onClose={(event, reason) => handleClose(reason, text)}
           key={text}
           className={classes.alert}
