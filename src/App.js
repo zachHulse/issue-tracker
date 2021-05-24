@@ -9,6 +9,7 @@ import Login from './pages/Login';
 import Messages from './components/Messages';
 import useSession from './hooks/useSession';
 import Issues from './pages/Issues';
+import Projects from './pages/Projects';
 
 // Create a client
 const queryClient = new QueryClient();
@@ -34,7 +35,8 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <ReactLocation>
         <Routes>
-          <PrivateRoute path="/" Element={Issues} />
+          <PrivateRoute path="issues" Element={Issues} />
+          <PrivateRoute path="/" Element={Projects} />
           <Route path="login" element={<Login />} />
           <PrivateRoute path="*" Element={Page404} />
         </Routes>
