@@ -1,12 +1,19 @@
 import React from 'react';
 import { Button, Card, CardContent, Container, Grid } from '@material-ui/core';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-location';
 import RegisteredTextField from '../components/RegisteredTextField';
 import useLogin from '../hooks/api/useLogin';
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
-  const { mutate: login } = useLogin();
+  const navigate = useNavigate();
+  const { mutate } = useLogin();
+
+  const login = async (credentials) => {
+    await mutate(credentials);
+    navigate('/');
+  };
 
   return (
     <Container>
