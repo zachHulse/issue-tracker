@@ -47,10 +47,9 @@ const DataTable = ({ useData, displayKeys }) => {
         <TableBody>
           {data.map((item) => (
             <StyledTableRow key={item.id}>
-              <StyledTableCell component="th" scope="row">
-                {item.name}
-              </StyledTableCell>
-              <StyledTableCell align="right">{item.description}</StyledTableCell>
+              {displayKeys.map((key) => (
+                <StyledTableCell>{item[key]}</StyledTableCell>
+              ))}
             </StyledTableRow>
           ))}
         </TableBody>
