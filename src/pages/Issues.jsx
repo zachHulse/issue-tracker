@@ -1,21 +1,16 @@
 import React from 'react';
 
-import { Container, List, ListItem, Typography } from '@material-ui/core';
+import { Container, Typography } from '@material-ui/core';
 import useIssues from '../hooks/api/useIssues';
+import DataTable from '../components/DataTable';
 
 const Issues = () => {
-  const { data = [], isLoading } = useIssues();
   return (
     <Container>
       <Typography variant="h2" gutterBottom>
         Issues
       </Typography>
-      <List>
-        {data.map((issue) => (
-          <ListItem button>{issue.name}</ListItem>
-        ))}
-      </List>
-      {isLoading && <Typography variant="overline">Loading . . .</Typography>}
+      <DataTable displayKeys={['name', 'code', 'story_points']} useData={useIssues} />
     </Container>
   );
 };
