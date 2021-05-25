@@ -2,8 +2,8 @@ import React from 'react';
 
 import './App.css';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { ReactLocation, Route, Navigate, Routes } from 'react-location';
-import { Container, Typography } from '@material-ui/core';
+import { ReactLocation, Route, Navigate, Routes, Link as LocationLink } from 'react-location';
+import { Container, Typography, Link } from '@material-ui/core';
 import * as propTypes from 'prop-types';
 import Login from './pages/Login';
 import Messages from './components/Messages';
@@ -12,6 +12,7 @@ import Issues from './pages/Issues';
 import Projects from './pages/Projects';
 import ProjectCreate from './pages/ProjectCreate';
 import ProjectUpdate from './pages/ProjectUpdate';
+import Home from './pages/Home';
 
 // Create a client
 const queryClient = new QueryClient();
@@ -36,7 +37,21 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ReactLocation>
+        {session.token && (
+          <nav>
+            <Link to="/" component={LocationLink}>
+              Home
+            </Link>
+            <Link to="issues" component={LocationLink}>
+              Issues
+            </Link>
+            <Link to="projects" component={LocationLink}>
+              Projects
+            </Link>
+          </nav>
+        )}
         <Routes>
+          <PrivateRoute path="/" Element={Home} />
           <PrivateRoute path="issues" Element={Issues} />
           <PrivateRoute path="projects" Element={Projects} />
           <PrivateRoute path="projects/create" Element={ProjectCreate} />
