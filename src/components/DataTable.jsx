@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {
+  IconButton,
   Paper,
   Table,
   TableBody,
@@ -11,7 +12,9 @@ import {
   Typography,
   withStyles,
 } from '@material-ui/core';
+import { Link } from 'react-location';
 import * as propTypes from 'prop-types';
+import { Edit } from '@material-ui/icons';
 import { title } from '../string';
 
 const StyledTableCell = withStyles((theme) => ({
@@ -32,7 +35,7 @@ const StyledTableRow = withStyles((theme) => ({
   },
 }))(TableRow);
 
-const DataTable = ({ useData, displayKeys }) => {
+const DataTable = ({ useData, displayKeys, rowLink }) => {
   const { data = [], isLoading } = useData();
   return (
     <TableContainer component={Paper}>
@@ -42,6 +45,7 @@ const DataTable = ({ useData, displayKeys }) => {
             {displayKeys.map((key) => (
               <StyledTableCell key={key}>{title(key)}</StyledTableCell>
             ))}
+            {rowLink && <StyledTableCell />}
           </TableRow>
         </TableHead>
         <TableBody>
@@ -50,6 +54,15 @@ const DataTable = ({ useData, displayKeys }) => {
               {displayKeys.map((key) => (
                 <StyledTableCell key={key}>{item[key]}</StyledTableCell>
               ))}
+              {rowLink && (
+                <StyledTableCell>
+                  <Link to={`${item.id}/update`}>
+                    <IconButton>
+                      <Edit />
+                    </IconButton>
+                  </Link>
+                </StyledTableCell>
+              )}
             </StyledTableRow>
           ))}
         </TableBody>
@@ -62,6 +75,10 @@ const DataTable = ({ useData, displayKeys }) => {
 DataTable.propTypes = {
   useData: propTypes.func.isRequired,
   displayKeys: propTypes.arrayOf(propTypes.string).isRequired,
+  rowLink: propTypes.bool,
+};
+DataTable.defaultProps = {
+  rowLink: true,
 };
 
 export default DataTable;
