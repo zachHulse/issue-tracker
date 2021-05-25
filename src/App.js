@@ -2,8 +2,8 @@ import React from 'react';
 
 import './App.css';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { ReactLocation, Route, Navigate, Routes, Link as LocationLink } from 'react-location';
-import { Container, Typography, Link } from '@material-ui/core';
+import { Link as LocationLink, Navigate, ReactLocation, Route, Routes } from 'react-location';
+import { AppBar, Container, Grid, Link, makeStyles, Toolbar, Typography } from '@material-ui/core';
 import * as propTypes from 'prop-types';
 import Login from './pages/Login';
 import Messages from './components/Messages';
@@ -16,6 +16,13 @@ import Home from './pages/Home';
 
 // Create a client
 const queryClient = new QueryClient();
+const useStyles = makeStyles(() => ({
+  menuItem: {
+    '&:hover': {
+      opacity: 0.3,
+    },
+  },
+}));
 
 const Page404 = () => (
   <Container>
@@ -25,6 +32,7 @@ const Page404 = () => (
 
 function App() {
   const { session } = useSession();
+  const classes = useStyles();
 
   const PrivateRoute = ({ path, Element }) => (
     <Route {...{ path }} element={session.token ? <Element /> : <Navigate to="login" />} />
@@ -38,17 +46,45 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <ReactLocation>
         {session.token && (
-          <nav>
-            <Link to="/" component={LocationLink}>
-              Home
-            </Link>
-            <Link to="issues" component={LocationLink}>
-              Issues
-            </Link>
-            <Link to="projects" component={LocationLink}>
-              Projects
-            </Link>
-          </nav>
+          <AppBar position="static" color="transparent">
+            <Toolbar>
+              <Grid container spacing={2}>
+                <Grid item className={classes.menuItem}>
+                  <Link
+                    to="/"
+                    component={LocationLink}
+                    variant="h4"
+                    color="textSecondary"
+                    underline="none"
+                  >
+                    Home
+                  </Link>
+                </Grid>
+                <Grid item className={classes.menuItem}>
+                  <Link
+                    to="issues"
+                    component={LocationLink}
+                    variant="h4"
+                    color="textSecondary"
+                    underline="none"
+                  >
+                    Issues
+                  </Link>
+                </Grid>
+                <Grid item className={classes.menuItem}>
+                  <Link
+                    to="projects"
+                    component={LocationLink}
+                    variant="h4"
+                    color="textSecondary"
+                    underline="none"
+                  >
+                    Projects
+                  </Link>
+                </Grid>
+              </Grid>
+            </Toolbar>
+          </AppBar>
         )}
         <Routes>
           <PrivateRoute path="/" Element={Home} />
