@@ -16,11 +16,14 @@ import Home from './pages/Home';
 
 // Create a client
 const queryClient = new QueryClient();
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   menuItem: {
     '&:hover': {
       opacity: 0.3,
     },
+  },
+  menuBar: {
+    marginBottom: theme.spacing(3),
   },
 }));
 
@@ -46,7 +49,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <ReactLocation>
         {session.token && (
-          <AppBar position="static" color="transparent">
+          <AppBar position="static" color="transparent" className={classes.menuBar}>
             <Toolbar>
               <Grid container spacing={2}>
                 <Grid item className={classes.menuItem}>
