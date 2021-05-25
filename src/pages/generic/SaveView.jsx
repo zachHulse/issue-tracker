@@ -2,10 +2,12 @@ import React from 'react';
 import { Card, CardContent, Container, Grid } from '@material-ui/core';
 import { Skeleton } from '@material-ui/lab';
 import * as propTypes from 'prop-types';
+import { useParams } from 'react-location';
 import ItemSave from '../../components/ItemSave';
 
-const SaveView = ({ useItem, id, fieldNames, HeaderElement, useSaveItem }) => {
-  const { data: item, isLoading } = useItem(id, Boolean(id));
+const SaveView = ({ useItem, fieldNames, HeaderElement, useSaveItem }) => {
+  const params = useParams();
+  const { data: item, isLoading } = useItem(params.id, Boolean(params.id));
 
   const Placeholder = () => (
     <Card variant="outlined">
@@ -28,7 +30,7 @@ const SaveView = ({ useItem, id, fieldNames, HeaderElement, useSaveItem }) => {
     </Card>
   );
 
-  return isLoading && Boolean(id) ? (
+  return isLoading && Boolean(params.id) ? (
     <Placeholder />
   ) : (
     <Container>
@@ -41,12 +43,8 @@ const SaveView = ({ useItem, id, fieldNames, HeaderElement, useSaveItem }) => {
 SaveView.propTypes = {
   fieldNames: propTypes.arrayOf(propTypes.string).isRequired,
   HeaderElement: propTypes.func.isRequired,
-  id: propTypes.oneOfType([propTypes.string, propTypes.number]),
   useItem: propTypes.func.isRequired,
   useSaveItem: propTypes.func.isRequired,
-};
-SaveView.defaultProps = {
-  id: null,
 };
 
 export default SaveView;

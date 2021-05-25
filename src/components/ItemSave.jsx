@@ -7,7 +7,7 @@ import RegisteredTextField from './RegisteredTextField';
 
 const ItemSave = ({ item, fieldNames, useSaveItem }) => {
   const { register, handleSubmit } = useForm({
-    defaultValues: { ...item, id: undefined },
+    defaultValues: { ...item },
   });
   const navigate = useNavigate();
   const { mutate } = useSaveItem();

@@ -5,7 +5,7 @@ import { useProject, useProjectSave } from '../hooks/api/useProjects';
 import SaveView from './generic/SaveView';
 import Project from '../types/project';
 
-const HeaderElement = ({ project }) => <Typography variant="h2">{project.name}</Typography>;
+const HeaderElement = ({ item }) => <Typography variant="h2">{item.name}</Typography>;
 const fieldNames = ['name', 'description', 'abbreviation'];
 
 const ProjectUpdate = () => {
@@ -19,7 +19,7 @@ const ProjectUpdate = () => {
 };
 
 HeaderElement.propTypes = {
-  project: propTypes.shape(Project).isRequired,
+  item: propTypes.shape(Project).isRequired,
 };
 
 export default ProjectUpdate;
