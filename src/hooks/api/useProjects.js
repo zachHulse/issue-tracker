@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 
 import request from './request';
 import * as constants from '../../constants';
@@ -13,6 +13,48 @@ const getProjects = async () => {
 
 export default function useProjects() {
   return useQuery('projects', getProjects, {
+    onError: () => {
+      addMessage('Failed to fetch projects, please try again.', constants.MESSAGE_TYPE_ERROR);
+    },
+  });
+}
+
+const getProject = async (id) => {
+  const { data } = await request(`${constants.PROJECT_URL}${id}/`, {
+    method: 'get',
+  });
+  return data;
+};
+
+export function useProject(id, disabled = false) {
+  return useQuery(['project', id], getProject, {
+    disabled,
+    onError: () => {
+      addMessage('Failed to fetch project, please try again.', constants.MESSAGE_TYPE_ERROR);
+    },
+  });
+}
+
+const saveProject = async (variables) => {
+  let method = 'post';
+  let url = constants.PROJECT_URL;
+  if (variables.id) {
+    method = 'put';
+    url += `${variables.id}/`;
+  }
+  const { data } = await request(url, {
+    method,
+  });
+  return data;
+};
+
+export function useProjectSave() {
+  const queryClient = useQueryClient();
+  return useMutation(saveProject, {
+    onSuccess: async (data) => {
+      queryClient.setQueryData(['project', { id: data.id }], data);
+      addMessage(`Project ${data.name} saved successfully`, constants.MESSAGE_TYPE_SUCCESS);
+    },
     onError: () => {
       addMessage('Failed to fetch projects, please try again.', constants.MESSAGE_TYPE_ERROR);
     },
