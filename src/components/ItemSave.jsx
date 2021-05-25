@@ -25,7 +25,7 @@ const ItemSave = ({ item, fieldNames, useSaveItem }) => {
             <Grid item xs={12}>
               <Grid container spacing={2}>
                 {fieldNames.map((fieldName) => (
-                  <Grid item xs={12}>
+                  <Grid item xs={12} key={fieldName}>
                     <RegisteredTextField {...{ fieldName, register }} />
                   </Grid>
                 ))}

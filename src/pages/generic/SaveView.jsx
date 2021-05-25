@@ -13,8 +13,8 @@ const SaveView = ({ useItem, id, fieldNames, HeaderElement, useSaveItem }) => {
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <Grid container spacing={2}>
-              {fieldNames.map(() => (
-                <Grid item xs={12}>
+              {fieldNames.map((fieldName) => (
+                <Grid item xs={12} key={fieldName}>
                   <Skeleton variant="text" />
                 </Grid>
               ))}
