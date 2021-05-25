@@ -44,6 +44,7 @@ const saveProject = async (variables) => {
   }
   const { data } = await request(url, {
     method,
+    data: variables,
   });
   return data;
 };
