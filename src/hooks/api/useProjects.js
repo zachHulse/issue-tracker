@@ -26,9 +26,9 @@ const getProject = async (id) => {
   return data;
 };
 
-export function useProject(id, disabled = false) {
+export function useProject(id, enabled = true) {
   return useQuery(['project', id], getProject, {
-    disabled,
+    enabled,
     onError: () => {
       addMessage('Failed to fetch project, please try again.', constants.MESSAGE_TYPE_ERROR);
     },
