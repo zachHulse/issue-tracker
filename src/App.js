@@ -2,8 +2,8 @@ import React from 'react';
 
 import './App.css';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { Link as LocationLink, Navigate, ReactLocation, Route, Routes } from 'react-location';
-import { AppBar, Container, Grid, Link, makeStyles, Toolbar, Typography } from '@material-ui/core';
+import { Link, Navigate, ReactLocation, Route, Routes } from 'react-location';
+import { AppBar, Container, Grid, makeStyles, Toolbar, Typography } from '@material-ui/core';
 import * as propTypes from 'prop-types';
 import Login from './pages/Login';
 import Messages from './components/Messages';
@@ -21,6 +21,9 @@ const useStyles = makeStyles((theme) => ({
     '&:hover': {
       opacity: 0.3,
     },
+  },
+  menuLink: {
+    textDecoration: 'none',
   },
   menuBar: {
     marginBottom: theme.spacing(3),
@@ -53,36 +56,24 @@ function App() {
             <Toolbar>
               <Grid container spacing={2}>
                 <Grid item className={classes.menuItem}>
-                  <Link
-                    to="/"
-                    component={LocationLink}
-                    variant="h4"
-                    color="textSecondary"
-                    underline="none"
-                  >
-                    Home
+                  <Link to="/" className={classes.menuLink}>
+                    <Typography variant="h4" color="textSecondary">
+                      Home
+                    </Typography>
                   </Link>
                 </Grid>
                 <Grid item className={classes.menuItem}>
-                  <Link
-                    to="issues"
-                    component={LocationLink}
-                    variant="h4"
-                    color="textSecondary"
-                    underline="none"
-                  >
-                    Issues
+                  <Link to="issues" className={classes.menuLink}>
+                    <Typography variant="h4" color="textSecondary">
+                      Issues
+                    </Typography>
                   </Link>
                 </Grid>
                 <Grid item className={classes.menuItem}>
-                  <Link
-                    to="projects"
-                    component={LocationLink}
-                    variant="h4"
-                    color="textSecondary"
-                    underline="none"
-                  >
-                    Projects
+                  <Link to="projects" className={classes.menuLink}>
+                    <Typography variant="h4" color="textSecondary">
+                      Projects
+                    </Typography>
                   </Link>
                 </Grid>
               </Grid>

@@ -40,7 +40,7 @@ const DataTable = ({ useData, displayKeys }) => {
         <TableHead>
           <TableRow>
             {displayKeys.map((key) => (
-              <StyledTableCell>{title(key)}</StyledTableCell>
+              <StyledTableCell key={key}>{title(key)}</StyledTableCell>
             ))}
           </TableRow>
         </TableHead>
@@ -48,7 +48,7 @@ const DataTable = ({ useData, displayKeys }) => {
           {data.map((item) => (
             <StyledTableRow key={item.id}>
               {displayKeys.map((key) => (
-                <StyledTableCell>{item[key]}</StyledTableCell>
+                <StyledTableCell key={key}>{item[key]}</StyledTableCell>
               ))}
             </StyledTableRow>
           ))}
