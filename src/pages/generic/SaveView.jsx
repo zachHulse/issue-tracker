@@ -32,7 +32,7 @@ const SaveView = ({ useItem, id, fieldNames, HeaderElement, useSaveItem }) => {
     <Placeholder />
   ) : (
     <Container>
-      <HeaderElement />
+      <HeaderElement {...{ item }} />
       <ItemSave {...{ item, fieldNames, useSaveItem }} />
     </Container>
   );
@@ -48,3 +48,5 @@ SaveView.propTypes = {
 SaveView.defaultProps = {
   id: null,
 };
+
+export default SaveView;
