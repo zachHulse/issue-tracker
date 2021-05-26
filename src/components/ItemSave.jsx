@@ -5,7 +5,7 @@ import { useNavigate } from 'react-location';
 import * as propTypes from 'prop-types';
 import RegisteredTextField from './RegisteredTextField';
 
-const ItemSave = ({ item, fieldNames, useSaveItem, fieldComponents }) => {
+const ItemSave = ({ item, fields, useSaveItem }) => {
   const { register, handleSubmit } = useForm({
     defaultValues: { ...item },
   });
@@ -17,12 +17,14 @@ const ItemSave = ({ item, fieldNames, useSaveItem, fieldComponents }) => {
     navigate('../');
   };
 
-  const getField = (fieldName) =>
-    fieldComponents[fieldName] ? (
-      fieldComponents[fieldName]({ fieldName, register })
+  const getField = (fieldName, fieldProps) => {
+    const { component: Component, type } = fieldProps;
+    return Component ? (
+      <Component {...{ fieldName, register, type }} />
     ) : (
-      <RegisteredTextField {...{ fieldName, register }} />
+      <RegisteredTextField {...{ fieldName, register, type }} />
     );
+  };
 
   return (
     <form onSubmit={handleSubmit(save)}>
@@ -31,9 +33,9 @@ const ItemSave = ({ item, fieldNames, useSaveItem, fieldComponents }) => {
           <Grid container spacing={3}>
             <Grid item xs={12}>
               <Grid container spacing={2}>
-                {fieldNames.map((fieldName) => (
+                {Object.entries(fields).map(([fieldName, fieldProps]) => (
                   <Grid item xs={12} key={fieldName}>
-                    {getField(fieldName)}
+                    {getField(fieldName, fieldProps)}
                   </Grid>
                 ))}
               </Grid>
@@ -51,14 +53,17 @@ const ItemSave = ({ item, fieldNames, useSaveItem, fieldComponents }) => {
 };
 
 ItemSave.propTypes = {
-  fieldComponents: propTypes.shape({ [propTypes.string]: propTypes.func }),
-  fieldNames: propTypes.arrayOf(propTypes.string).isRequired,
+  fields: propTypes.shape({
+    [propTypes.string]: {
+      type: propTypes.string,
+      component: propTypes.func,
+    },
+  }).isRequired,
   item: propTypes.shape({ id: propTypes.number }),
   useSaveItem: propTypes.func.isRequired,
 };
 ItemSave.defaultProps = {
   item: {},
-  fieldComponents: {},
 };
 
 export default ItemSave;

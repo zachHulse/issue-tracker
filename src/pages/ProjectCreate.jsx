@@ -5,14 +5,14 @@ import SaveView from './generic/SaveView';
 
 const ProjectCreate = () => {
   const HeaderElement = () => <Typography variant="h2">Create Project</Typography>;
-  const fieldNames = ['name', 'description', 'abbreviation'];
+  const fields = {
+    name: {},
+    description: {},
+    abbreviation: {},
+  };
 
   return (
-    <SaveView
-      useItem={useProject}
-      useSaveItem={useProjectSave}
-      {...{ HeaderElement, fieldNames }}
-    />
+    <SaveView useItem={useProject} useSaveItem={useProjectSave} {...{ HeaderElement, fields }} />
   );
 };
 

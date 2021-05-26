@@ -6,15 +6,16 @@ import SaveView from './generic/SaveView';
 import Project from '../types/project';
 
 const HeaderElement = ({ item }) => <Typography variant="h2">{item?.name}</Typography>;
-const fieldNames = ['name', 'description', 'abbreviation'];
 
 const ProjectUpdate = () => {
+  const fields = {
+    name: {},
+    description: {},
+    abbreviation: {},
+  };
+
   return (
-    <SaveView
-      useItem={useProject}
-      useSaveItem={useProjectSave}
-      {...{ HeaderElement, fieldNames }}
-    />
+    <SaveView useItem={useProject} useSaveItem={useProjectSave} {...{ HeaderElement, fields }} />
   );
 };
 

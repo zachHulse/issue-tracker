@@ -5,7 +5,7 @@ import * as propTypes from 'prop-types';
 import { useParams } from 'react-location';
 import ItemSave from '../../components/ItemSave';
 
-const SaveView = ({ useItem, fieldNames, HeaderElement, useSaveItem, fieldComponents }) => {
+const SaveView = ({ useItem, fields, HeaderElement, useSaveItem }) => {
   const params = useParams();
   const { data: item, isLoading } = useItem(params.id, Boolean(params.id));
 
@@ -15,7 +15,7 @@ const SaveView = ({ useItem, fieldNames, HeaderElement, useSaveItem, fieldCompon
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <Grid container spacing={2}>
-              {fieldNames.map((fieldName) => (
+              {Object.keys(fields).map((fieldName) => (
                 <Grid item xs={12} key={fieldName}>
                   <Skeleton variant="text" />
                 </Grid>
@@ -35,21 +35,21 @@ const SaveView = ({ useItem, fieldNames, HeaderElement, useSaveItem, fieldCompon
   ) : (
     <Container>
       <HeaderElement {...{ item }} />
-      <ItemSave {...{ item, fieldNames, useSaveItem, fieldComponents }} />
+      <ItemSave {...{ item, fields, useSaveItem }} />
     </Container>
   );
 };
 
 SaveView.propTypes = {
-  fieldComponents: propTypes.shape({ [propTypes.string]: propTypes.func }),
-  fieldNames: propTypes.arrayOf(propTypes.string).isRequired,
+  fields: propTypes.shape({
+    [propTypes.string]: {
+      type: propTypes.string,
+      component: propTypes.func,
+    },
+  }).isRequired,
   HeaderElement: propTypes.func.isRequired,
   useItem: propTypes.func.isRequired,
   useSaveItem: propTypes.func.isRequired,
-};
-
-SaveView.defaultProps = {
-  fieldComponents: {},
 };
 
 export default SaveView;
