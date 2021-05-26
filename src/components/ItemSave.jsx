@@ -5,7 +5,7 @@ import { useNavigate } from 'react-location';
 import * as propTypes from 'prop-types';
 import RegisteredTextField from './RegisteredTextField';
 
-const ItemSave = ({ item, fieldNames, useSaveItem }) => {
+const ItemSave = ({ item, fieldNames, useSaveItem, fieldComponents }) => {
   const { register, handleSubmit } = useForm({
     defaultValues: { ...item },
   });
@@ -17,6 +17,13 @@ const ItemSave = ({ item, fieldNames, useSaveItem }) => {
     navigate('../');
   };
 
+  const getField = (fieldName) =>
+    fieldComponents[fieldName] ? (
+      fieldComponents[fieldName]({ fieldName, register })
+    ) : (
+      <RegisteredTextField {...{ fieldName, register }} />
+    );
+
   return (
     <form onSubmit={handleSubmit(save)}>
       <Card variant="outlined">
@@ -26,7 +33,7 @@ const ItemSave = ({ item, fieldNames, useSaveItem }) => {
               <Grid container spacing={2}>
                 {fieldNames.map((fieldName) => (
                   <Grid item xs={12} key={fieldName}>
-                    <RegisteredTextField {...{ fieldName, register }} />
+                    {getField(fieldName)}
                   </Grid>
                 ))}
               </Grid>
@@ -44,12 +51,14 @@ const ItemSave = ({ item, fieldNames, useSaveItem }) => {
 };
 
 ItemSave.propTypes = {
-  item: propTypes.shape({ id: propTypes.number }),
+  fieldComponents: propTypes.shape({ [propTypes.string]: propTypes.func }),
   fieldNames: propTypes.arrayOf(propTypes.string).isRequired,
+  item: propTypes.shape({ id: propTypes.number }),
   useSaveItem: propTypes.func.isRequired,
 };
 ItemSave.defaultProps = {
   item: {},
+  fieldComponents: {},
 };
 
 export default ItemSave;
