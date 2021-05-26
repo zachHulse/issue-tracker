@@ -13,6 +13,9 @@ import Projects from './pages/Projects';
 import ProjectCreate from './pages/ProjectCreate';
 import ProjectUpdate from './pages/ProjectUpdate';
 import Home from './pages/Home';
+import SprintCreate from './pages/SprintCreate';
+import SprintUpdate from './pages/SprintUpdate';
+import Sprints from './pages/Sprints';
 
 // Create a client
 const queryClient = new QueryClient();
@@ -76,6 +79,13 @@ function App() {
                     </Typography>
                   </Link>
                 </Grid>
+                <Grid item className={classes.menuItem}>
+                  <Link to="sprints" className={classes.menuLink}>
+                    <Typography variant="h4" color="textSecondary">
+                      Sprints
+                    </Typography>
+                  </Link>
+                </Grid>
               </Grid>
             </Toolbar>
           </AppBar>
@@ -86,6 +96,9 @@ function App() {
           <PrivateRoute path="projects" Element={Projects} />
           <PrivateRoute path="projects/create" Element={ProjectCreate} />
           <PrivateRoute path="projects/:id/update" Element={ProjectUpdate} />
+          <PrivateRoute path="sprints" Element={Sprints} />
+          <PrivateRoute path="sprints/create" Element={SprintCreate} />
+          <PrivateRoute path="sprints/:id/update" Element={SprintUpdate} />
           <Route path="login" element={<Login />} />
           <PrivateRoute path="*" Element={Page404} />
         </Routes>
