@@ -20,9 +20,9 @@ const ItemSave = ({ item, fields, useSaveItem }) => {
   const getField = (fieldName, fieldProps) => {
     const { component: Component, type } = fieldProps;
     return Component ? (
-      <Component {...{ fieldName, register, type }} />
+      <Component {...{ fieldName, register, type, item }} />
     ) : (
-      <RegisteredTextField {...{ fieldName, register, type }} />
+      <RegisteredTextField {...{ fieldName, register, type, item }} />
     );
   };
 
