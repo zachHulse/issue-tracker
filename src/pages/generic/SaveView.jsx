@@ -41,12 +41,12 @@ const SaveView = ({ useItem, fields, HeaderElement, useSaveItem }) => {
 };
 
 SaveView.propTypes = {
-  fields: propTypes.shape({
-    [propTypes.string]: {
+  fields: propTypes.objectOf(
+    propTypes.shape({
       type: propTypes.string,
       component: propTypes.func,
-    },
-  }).isRequired,
+    }),
+  ).isRequired,
   HeaderElement: propTypes.func.isRequired,
   useItem: propTypes.func.isRequired,
   useSaveItem: propTypes.func.isRequired,
