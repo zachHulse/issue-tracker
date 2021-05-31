@@ -5,35 +5,17 @@ import {
   Paper,
   Table,
   TableBody,
-  TableCell,
   TableContainer,
   TableHead,
   TableRow,
   Typography,
-  withStyles,
 } from '@material-ui/core';
 import { Link } from 'react-location';
 import * as propTypes from 'prop-types';
 import { Edit } from '@material-ui/icons';
 import { title } from '../string';
-
-const StyledTableCell = withStyles((theme) => ({
-  head: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
-  body: {
-    fontSize: 14,
-  },
-}))(TableCell);
-
-const StyledTableRow = withStyles((theme) => ({
-  root: {
-    '&:nth-of-type(odd)': {
-      backgroundColor: theme.palette.action.hover,
-    },
-  },
-}))(TableRow);
+import StyledTableCell from './StyledTableCell';
+import StyledTableRow from './StyledTableRow';
 
 const DataTable = ({ useData, displayKeys, rowLink }) => {
   const { data = [], isLoading } = useData();
