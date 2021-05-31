@@ -13,7 +13,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const ListView = ({ modelName, displayKeys, useData }) => {
+const ListView = ({ modelName, displayKeys, useData, formattedCells }) => {
   const classes = useStyles();
   return (
     <Container>
@@ -27,15 +27,19 @@ const ListView = ({ modelName, displayKeys, useData }) => {
           </Link>
         </Grid>
       </Grid>
-      <DataTable {...{ displayKeys, useData }} />
+      <DataTable {...{ displayKeys, useData, formattedCells }} />
     </Container>
   );
 };
 
 ListView.propTypes = {
-  modelName: propTypes.string.isRequired,
   displayKeys: propTypes.arrayOf(propTypes.string).isRequired,
+  formattedCells: propTypes.shape({ [propTypes.string]: propTypes.func }),
+  modelName: propTypes.string.isRequired,
   useData: propTypes.func.isRequired,
+};
+ListView.defaultProps = {
+  formattedCells: {},
 };
 
 export default ListView;

@@ -17,8 +17,16 @@ import { title } from '../string';
 import StyledTableCell from './StyledTableCell';
 import StyledTableRow from './StyledTableRow';
 
-const DataTable = ({ useData, displayKeys, rowLink }) => {
+const DataTable = ({ useData, displayKeys, rowLink, formattedCells }) => {
   const { data = [], isLoading } = useData();
+  const getCell = (key, item) => {
+    const Component = formattedCells[key];
+    return Component ? (
+      <Component {...{ item, key }} />
+    ) : (
+      <StyledTableCell key={key}>{item[key]}</StyledTableCell>
+    );
+  };
   return (
     <TableContainer component={Paper}>
       <Table aria-label="simple table">
@@ -33,9 +41,7 @@ const DataTable = ({ useData, displayKeys, rowLink }) => {
         <TableBody>
           {data.map((item) => (
             <StyledTableRow key={item.id}>
-              {displayKeys.map((key) => (
-                <StyledTableCell key={key}>{item[key]}</StyledTableCell>
-              ))}
+              {displayKeys.map((key) => getCell(key, item))}
               {rowLink && (
                 <StyledTableCell>
                   <Link to={`${item.id}/update`}>
@@ -55,12 +61,14 @@ const DataTable = ({ useData, displayKeys, rowLink }) => {
 };
 
 DataTable.propTypes = {
-  useData: propTypes.func.isRequired,
   displayKeys: propTypes.arrayOf(propTypes.string).isRequired,
+  formattedCells: propTypes.shape({ [propTypes.string]: propTypes.func }),
   rowLink: propTypes.bool,
+  useData: propTypes.func.isRequired,
 };
 DataTable.defaultProps = {
   rowLink: true,
+  formattedCells: {},
 };
 
 export default DataTable;
