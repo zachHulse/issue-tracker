@@ -2,12 +2,10 @@ import React from 'react';
 import { MenuItem, TextField } from '@material-ui/core';
 import * as propTypes from 'prop-types';
 import useProjects from '../../hooks/api/useProjects';
-import { title } from '../../string';
 
 const ProjectSelect = ({ fieldName, register }) => {
   const inputProps = register(fieldName);
   const { name, onBlur, onChange, ref } = inputProps;
-  const label = title(name);
   const { data = [] } = useProjects();
 
   return (
@@ -18,7 +16,8 @@ const ProjectSelect = ({ fieldName, register }) => {
       InputLabelProps={{
         shrink: true,
       }}
-      {...{ name, onBlur, onChange, inputRef: ref, label }}
+      label="Project"
+      {...{ name, onBlur, onChange, inputRef: ref }}
     >
       {data.map((project) => (
         <MenuItem value={project.id}>{project.name}</MenuItem>

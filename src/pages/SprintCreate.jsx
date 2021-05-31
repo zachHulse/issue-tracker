@@ -7,7 +7,7 @@ import { useSprint, useSprintSave } from '../hooks/api/useSprints';
 const SprintCreate = () => {
   const HeaderElement = () => <Typography variant="h2">Create Sprint</Typography>;
   const fields = {
-    project: {
+    project_id: {
       component: ProjectSelect,
     },
     start: { type: 'date' },
