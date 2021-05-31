@@ -1,7 +1,7 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
 import * as propTypes from 'prop-types';
-import { useProject, useProjectSave } from '../hooks/api/useProjects';
+import { useSprint, useSprintSave } from '../hooks/api/useSprints';
 import SaveView from './generic/SaveView';
 import ProjectSelect from '../components/fields/ProjectSelect';
 import Sprint from '../types/sprint';
@@ -22,7 +22,7 @@ const SprintUpdate = () => {
   };
 
   return (
-    <SaveView useItem={useProject} useSaveItem={useProjectSave} {...{ HeaderElement, fields }} />
+    <SaveView useItem={useSprint} useSaveItem={useSprintSave} {...{ HeaderElement, fields }} />
   );
 };
 

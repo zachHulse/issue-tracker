@@ -1,8 +1,8 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
-import { useProject, useProjectSave } from '../hooks/api/useProjects';
 import SaveView from './generic/SaveView';
 import ProjectSelect from '../components/fields/ProjectSelect';
+import { useSprint, useSprintSave } from '../hooks/api/useSprints';
 
 const SprintCreate = () => {
   const HeaderElement = () => <Typography variant="h2">Create Sprint</Typography>;
@@ -15,7 +15,7 @@ const SprintCreate = () => {
   };
 
   return (
-    <SaveView useItem={useProject} useSaveItem={useProjectSave} {...{ HeaderElement, fields }} />
+    <SaveView useItem={useSprint} useSaveItem={useSprintSave} {...{ HeaderElement, fields }} />
   );
 };
 
