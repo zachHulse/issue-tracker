@@ -14,7 +14,7 @@ const HeaderElement = ({ item }) => (
 
 const SprintUpdate = () => {
   const fields = {
-    project: {
+    project_id: {
       component: ProjectSelect,
     },
     start: { type: 'date' },
