@@ -53,12 +53,12 @@ const ItemSave = ({ item, fields, useSaveItem }) => {
 };
 
 ItemSave.propTypes = {
-  fields: propTypes.shape({
-    [propTypes.string]: {
+  fields: propTypes.objectOf(
+    propTypes.shape({
       type: propTypes.string,
       component: propTypes.func,
-    },
-  }).isRequired,
+    }),
+  ).isRequired,
   item: propTypes.shape({ id: propTypes.number }),
   useSaveItem: propTypes.func.isRequired,
 };

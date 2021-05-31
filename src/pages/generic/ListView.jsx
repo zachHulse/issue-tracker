@@ -34,7 +34,7 @@ const ListView = ({ modelName, displayKeys, useData, formattedCells }) => {
 
 ListView.propTypes = {
   displayKeys: propTypes.arrayOf(propTypes.string).isRequired,
-  formattedCells: propTypes.shape({ [propTypes.string]: propTypes.func }),
+  formattedCells: propTypes.objectOf(propTypes.func),
   modelName: propTypes.string.isRequired,
   useData: propTypes.func.isRequired,
 };
