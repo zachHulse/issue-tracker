@@ -15,6 +15,9 @@ const ProjectSelect = ({ fieldName, register }) => {
       select
       variant="outlined"
       fullWidth
+      InputLabelProps={{
+        shrink: true,
+      }}
       {...{ name, onBlur, onChange, inputRef: ref, label }}
     >
       {data.map((project) => (
