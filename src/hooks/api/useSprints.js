@@ -54,7 +54,10 @@ export function useSprintSave() {
   return useMutation(saveSprint, {
     onSuccess: async (data) => {
       queryClient.setQueryData(['sprint', { id: data.id }], data);
-      addMessage(`Sprint ${data.name} saved successfully`, constants.MESSAGE_TYPE_SUCCESS);
+      addMessage(
+        `Sprint ${data.start} - ${data.finish} saved successfully`,
+        constants.MESSAGE_TYPE_SUCCESS,
+      );
     },
     onError: () => {
       addMessage('Failed to fetch sprints, please try again.', constants.MESSAGE_TYPE_ERROR);
