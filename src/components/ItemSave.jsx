@@ -3,7 +3,7 @@ import { Button, Card, CardContent, Grid } from '@material-ui/core';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-location';
 import * as propTypes from 'prop-types';
-import RegisteredTextField from './RegisteredTextField';
+import RegisteredTextField from './fields/RegisteredTextField';
 
 const ItemSave = ({ item, fields, useSaveItem }) => {
   const { register, handleSubmit } = useForm({

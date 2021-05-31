@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Card, CardContent, Container, Grid } from '@material-ui/core';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-location';
-import RegisteredTextField from '../components/RegisteredTextField';
+import RegisteredTextField from '../components/fields/RegisteredTextField';
 import useLogin from '../hooks/api/useLogin';
 
 const Login = () => {
