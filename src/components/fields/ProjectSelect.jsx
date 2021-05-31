@@ -20,7 +20,9 @@ const ProjectSelect = ({ fieldName, register }) => {
       {...{ name, onBlur, onChange, inputRef: ref }}
     >
       {data.map((project) => (
-        <MenuItem value={project.id}>{project.name}</MenuItem>
+        <MenuItem key={project.id} value={project.id}>
+          {project.name}
+        </MenuItem>
       ))}
     </TextField>
   );
