@@ -8,10 +8,15 @@ const ProjectSelect = ({ fieldName, register }) => {
   const inputProps = register(fieldName);
   const { name, onBlur, onChange, ref } = inputProps;
   const label = title(name);
-  const { data } = useProjects();
+  const { data = [] } = useProjects();
 
   return (
-    <TextField select variant="outlined" {...{ name, onBlur, onChange, inputRef: ref, label }}>
+    <TextField
+      select
+      variant="outlined"
+      fullWidth
+      {...{ name, onBlur, onChange, inputRef: ref, label }}
+    >
       {data.map((project) => (
         <MenuItem value={project.id}>{project.name}</MenuItem>
       ))}
