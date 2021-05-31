@@ -8,7 +8,7 @@ import * as propTypes from 'prop-types';
 import Login from './pages/Login';
 import Messages from './components/Messages';
 import useSession from './hooks/useSession';
-import Issues from './pages/Issues';
+import ProjectIssues from './pages/ProjectIssues';
 import Projects from './pages/Projects';
 import ProjectCreate from './pages/ProjectCreate';
 import ProjectUpdate from './pages/ProjectUpdate';
@@ -66,13 +66,6 @@ function App() {
                   </Link>
                 </Grid>
                 <Grid item className={classes.menuItem}>
-                  <Link to="issues" className={classes.menuLink}>
-                    <Typography variant="h4" color="textSecondary">
-                      Issues
-                    </Typography>
-                  </Link>
-                </Grid>
-                <Grid item className={classes.menuItem}>
                   <Link to="projects" className={classes.menuLink}>
                     <Typography variant="h4" color="textSecondary">
                       Projects
@@ -92,7 +85,7 @@ function App() {
         )}
         <Routes>
           <PrivateRoute path="/" Element={Home} />
-          <PrivateRoute path="issues" Element={Issues} />
+          <PrivateRoute path="projects/:id/issues" Element={ProjectIssues} />
           <PrivateRoute path="projects" Element={Projects} />
           <PrivateRoute path="projects/create" Element={ProjectCreate} />
           <PrivateRoute path="projects/:id/update" Element={ProjectUpdate} />
