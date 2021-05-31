@@ -53,7 +53,8 @@ export function useSprintSave() {
   const queryClient = useQueryClient();
   return useMutation(saveSprint, {
     onSuccess: async (data) => {
-      queryClient.setQueryData(['sprint', { id: data.id }], data);
+      await queryClient.setQueryData(['sprint', { id: data.id }], data);
+      await queryClient.invalidateQueries('sprints');
       addMessage(
         `Sprint ${data.start} - ${data.finish} saved successfully`,
         constants.MESSAGE_TYPE_SUCCESS,

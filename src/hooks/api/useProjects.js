@@ -53,7 +53,8 @@ export function useProjectSave() {
   const queryClient = useQueryClient();
   return useMutation(saveProject, {
     onSuccess: async (data) => {
-      queryClient.setQueryData(['project', { id: data.id }], data);
+      await queryClient.setQueryData(['project', { id: data.id }], data);
+      await queryClient.invalidateQueries('projects');
       addMessage(`Project ${data.name} saved successfully`, constants.MESSAGE_TYPE_SUCCESS);
     },
     onError: () => {
