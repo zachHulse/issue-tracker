@@ -7,3 +7,8 @@ export const title = (str) =>
     .split('_')
     .map((w) => w[0].toUpperCase() + w.substr(1).toLowerCase())
     .join('');
+
+export const isoToStandardDate = (str) => {
+  const date = new Date(str);
+  return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
+};
