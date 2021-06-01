@@ -1,18 +1,18 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
+import { useParams } from 'react-location';
 import SaveView from './generic/SaveView';
-import ProjectSelect from '../components/fields/ProjectSelect';
-import { useSprint, useSprintSave } from '../hooks/api/useSprints';
 import SprintSelect from '../components/fields/SprintSelect';
 import StoryPointSelect from '../components/fields/StoryPointSelect';
+import { useProject } from '../hooks/api/useProjects';
+import { useIssue, useSaveIssue } from '../hooks/api/useIssues';
 
 const IssueCreate = () => {
-  const HeaderElement = () => <Typography variant="h2">Create Issue</Typography>;
+  const params = useParams();
+  const { data = {} } = useProject(params.project_id, Boolean(params.project_id));
+  const HeaderElement = () => <Typography variant="h2">Create Issue for {data.name}</Typography>;
   const fields = {
     name: {},
-    project_id: {
-      component: ProjectSelect,
-    },
     sprint_id: {
       component: SprintSelect,
     },
@@ -21,7 +21,11 @@ const IssueCreate = () => {
   };
 
   return (
-    <SaveView useItem={useSprint} useSaveItem={useSprintSave} {...{ HeaderElement, fields }} />
+    <SaveView
+      useItem={(id, enabled) => useIssue(id, params.id, enabled)}
+      useSaveItem={() => useSaveIssue(params.project_id)}
+      {...{ HeaderElement, fields }}
+    />
   );
 };
 

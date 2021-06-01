@@ -27,7 +27,7 @@ const getIssue = async (id, projectId) => {
   return data;
 };
 
-export function useSprint(id, projectId, enabled = true) {
+export function useIssue(id, projectId, enabled = true) {
   return useQuery(['issue', id], () => getIssue(id, projectId), {
     enabled,
     onError: () => {
@@ -50,9 +50,9 @@ const saveIssue = async (projectId, variables) => {
   return data;
 };
 
-export function useSaveIssue() {
+export function useSaveIssue(projectId) {
   const queryClient = useQueryClient();
-  return useMutation(saveIssue, {
+  return useMutation((variables) => saveIssue(projectId, variables), {
     onSuccess: async (data) => {
       await queryClient.setQueryData(['issue', { id: data.id }], data);
       await queryClient.invalidateQueries('issues');

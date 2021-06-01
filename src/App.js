@@ -87,7 +87,7 @@ function App() {
         <Routes>
           <PrivateRoute path="/" Element={Home} />
           <PrivateRoute path="projects" Element={Home} />
-          <PrivateRoute path="projects/:id/issues" Element={Issues} />
+          <PrivateRoute path="projects/:project_id/issues" Element={Issues} />
           <PrivateRoute path="projects/create" Element={ProjectCreate} />
           <PrivateRoute path="projects/:project_id/issues/create" Element={IssueCreate} />
           <PrivateRoute path="projects/:project_id/issues/:id/update" Element={IssueUpdate} />
