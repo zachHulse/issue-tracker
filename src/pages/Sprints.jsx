@@ -1,5 +1,6 @@
 import React from 'react';
 import * as propTypes from 'prop-types';
+import { useParams } from 'react-location';
 import useSprints from '../hooks/api/useSprints';
 import ListView from './generic/ListView';
 import { useProject } from '../hooks/api/useProjects';
@@ -12,12 +13,13 @@ const ProjectCell = ({ item }) => {
 };
 
 const Sprints = () => {
+  const params = useParams();
   return (
     <ListView
       modelName="sprint"
       displayKeys={['project', 'start', 'finish']}
       formattedCells={{ project: ProjectCell }}
-      useData={useSprints}
+      useData={() => useSprints(params.id)}
     />
   );
 };

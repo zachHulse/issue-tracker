@@ -9,7 +9,6 @@ import Login from './pages/Login';
 import Messages from './components/Messages';
 import useSession from './hooks/useSession';
 import ProjectIssues from './pages/ProjectIssues';
-import Projects from './pages/Projects';
 import ProjectCreate from './pages/ProjectCreate';
 import ProjectUpdate from './pages/ProjectUpdate';
 import Home from './pages/Home';
@@ -87,18 +86,15 @@ function App() {
         )}
         <Routes>
           <PrivateRoute path="/" Element={Home} />
+          <PrivateRoute path="projects" Element={Home} />
           <PrivateRoute path="projects/:id/issues" Element={ProjectIssues} />
-          <PrivateRoute path="projects" Element={Projects} />
           <PrivateRoute path="projects/create" Element={ProjectCreate} />
           <PrivateRoute path="projects/:project_id/issues/create" Element={IssueCreate} />
-          <PrivateRoute path="projects/:project_id/issues/update" Element={IssueUpdate} />
-          <PrivateRoute path="sprints/:sprint_id/issues/create" Element={IssueCreate} />
-          <PrivateRoute path="sprints/:sprint_id/issues/update" Element={IssueUpdate} />
-          <PrivateRoute path="projects/create" Element={ProjectCreate} />
+          <PrivateRoute path="projects/:project_id/issues/:id/update" Element={IssueUpdate} />
           <PrivateRoute path="projects/:id/update" Element={ProjectUpdate} />
-          <PrivateRoute path="sprints" Element={Sprints} />
-          <PrivateRoute path="sprints/create" Element={SprintCreate} />
-          <PrivateRoute path="sprints/:id/update" Element={SprintUpdate} />
+          <PrivateRoute path="projects/:id/sprints" Element={Sprints} />
+          <PrivateRoute path="projects/:id/sprints/create" Element={SprintCreate} />
+          <PrivateRoute path="projects/:project_id/sprints/:id/update" Element={SprintUpdate} />
           <Route path="login" element={<Login />} />
           <PrivateRoute path="*" Element={Page404} />
         </Routes>
