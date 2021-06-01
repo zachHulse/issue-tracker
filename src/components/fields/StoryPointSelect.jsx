@@ -19,7 +19,9 @@ const SprintSelect = ({ fieldName, register, item }) => {
       {...{ name, onBlur, onChange, inputRef: ref }}
     >
       {[...Array(5).keys()].map((num) => (
-        <MenuItem value={num + 1}>{num + 1}</MenuItem>
+        <MenuItem key={num} value={num + 1}>
+          {num + 1}
+        </MenuItem>
       ))}
     </TextField>
   );

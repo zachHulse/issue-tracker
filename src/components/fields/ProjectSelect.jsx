@@ -20,7 +20,7 @@ const ProjectSelect = ({ fieldName, register, item }) => {
         shrink: true,
       }}
       label="Project"
-      defaultValue={item.project_id}
+      defaultValue={item.project_id || ''}
       {...{ name, onBlur, onChange, inputRef: ref }}
     >
       {data.map((project) => (

@@ -4,7 +4,7 @@ import SaveView from './generic/SaveView';
 import ProjectSelect from '../components/fields/ProjectSelect';
 import { useSprint, useSprintSave } from '../hooks/api/useSprints';
 import SprintSelect from '../components/fields/SprintSelect';
-import StoryPointSelect from '../components/StoryPointSelect';
+import StoryPointSelect from '../components/fields/StoryPointSelect';
 
 const IssueCreate = () => {
   const HeaderElement = () => <Typography variant="h2">Create Issue</Typography>;

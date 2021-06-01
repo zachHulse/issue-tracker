@@ -20,11 +20,11 @@ const SprintSelect = ({ fieldName, register, item }) => {
         shrink: true,
       }}
       label="Sprint"
-      defaultValue={item.sprint_id}
+      defaultValue={item.sprint_id || ''}
       {...{ name, onBlur, onChange, inputRef: ref }}
     >
       {data.map((sprint) => (
-        <MenuItem value={sprint.id}>
+        <MenuItem key={sprint.id} value={sprint.id}>
           {sprint.start} - {sprint.finish}
         </MenuItem>
       ))}
