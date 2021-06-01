@@ -16,6 +16,8 @@ import Home from './pages/Home';
 import SprintCreate from './pages/SprintCreate';
 import SprintUpdate from './pages/SprintUpdate';
 import Sprints from './pages/Sprints';
+import IssueCreate from './pages/IssueCreate';
+import IssueUpdate from './pages/IssueUpdate';
 
 // Create a client
 const queryClient = new QueryClient();
@@ -87,6 +89,11 @@ function App() {
           <PrivateRoute path="/" Element={Home} />
           <PrivateRoute path="projects/:id/issues" Element={ProjectIssues} />
           <PrivateRoute path="projects" Element={Projects} />
+          <PrivateRoute path="projects/create" Element={ProjectCreate} />
+          <PrivateRoute path="projects/:project_id/issues/create" Element={IssueCreate} />
+          <PrivateRoute path="projects/:project_id/issues/update" Element={IssueUpdate} />
+          <PrivateRoute path="sprints/:sprint_id/issues/create" Element={IssueCreate} />
+          <PrivateRoute path="sprints/:sprint_id/issues/update" Element={IssueUpdate} />
           <PrivateRoute path="projects/create" Element={ProjectCreate} />
           <PrivateRoute path="projects/:id/update" Element={ProjectUpdate} />
           <PrivateRoute path="sprints" Element={Sprints} />
