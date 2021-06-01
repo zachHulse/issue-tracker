@@ -36,9 +36,9 @@ export function useSprint(id, projectId, enabled = true) {
   });
 }
 
-const saveSprint = async (variables) => {
+const saveSprint = async (projectId, variables) => {
   let method = 'post';
-  let url = constants.SPRINT_URL;
+  let url = replace(constants.SPRINT_URL, projectId);
   if (variables.id) {
     method = 'put';
     url += `${variables.id}/`;
@@ -50,9 +50,9 @@ const saveSprint = async (variables) => {
   return data;
 };
 
-export function useSprintSave() {
+export function useSprintSave(projectId) {
   const queryClient = useQueryClient();
-  return useMutation(saveSprint, {
+  return useMutation((variables) => saveSprint(projectId, variables), {
     onSuccess: async (data) => {
       await queryClient.setQueryData(['sprint', { id: data.id }], data);
       await queryClient.invalidateQueries('sprints');

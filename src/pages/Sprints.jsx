@@ -19,7 +19,7 @@ const Sprints = () => {
       modelName="sprint"
       displayKeys={['project', 'start', 'finish']}
       formattedCells={{ project: ProjectCell }}
-      useData={() => useSprints(params.id)}
+      useData={() => useSprints(params.project_id)}
     />
   );
 };

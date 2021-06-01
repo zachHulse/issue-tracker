@@ -92,8 +92,8 @@ function App() {
           <PrivateRoute path="projects/:project_id/issues/create" Element={IssueCreate} />
           <PrivateRoute path="projects/:project_id/issues/:id/update" Element={IssueUpdate} />
           <PrivateRoute path="projects/:id/update" Element={ProjectUpdate} />
-          <PrivateRoute path="projects/:id/sprints" Element={Sprints} />
-          <PrivateRoute path="projects/:id/sprints/create" Element={SprintCreate} />
+          <PrivateRoute path="projects/:project_id/sprints" Element={Sprints} />
+          <PrivateRoute path="projects/:project_id/sprints/create" Element={SprintCreate} />
           <PrivateRoute path="projects/:project_id/sprints/:id/update" Element={SprintUpdate} />
           <Route path="login" element={<Login />} />
           <PrivateRoute path="*" Element={Page404} />
