@@ -8,7 +8,7 @@ import * as propTypes from 'prop-types';
 import Login from './pages/Login';
 import Messages from './components/Messages';
 import useSession from './hooks/useSession';
-import ProjectIssues from './pages/ProjectIssues';
+import Issues from './pages/Issues';
 import ProjectCreate from './pages/ProjectCreate';
 import ProjectUpdate from './pages/ProjectUpdate';
 import Home from './pages/Home';
@@ -87,7 +87,7 @@ function App() {
         <Routes>
           <PrivateRoute path="/" Element={Home} />
           <PrivateRoute path="projects" Element={Home} />
-          <PrivateRoute path="projects/:id/issues" Element={ProjectIssues} />
+          <PrivateRoute path="projects/:id/issues" Element={Issues} />
           <PrivateRoute path="projects/create" Element={ProjectCreate} />
           <PrivateRoute path="projects/:project_id/issues/create" Element={IssueCreate} />
           <PrivateRoute path="projects/:project_id/issues/:id/update" Element={IssueUpdate} />

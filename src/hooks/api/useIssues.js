@@ -5,39 +5,40 @@ import * as constants from '../../constants';
 import { addMessage } from '../useMessages';
 import replace from '../../string';
 
-const getProjectIssues = async (key, id) => {
-  const { data } = await request(replace(constants.PROJECT_ISSUES_URL, id), {
+const getIssues = async (projectId) => {
+  const { data } = await request(replace(constants.ISSUE_URL, projectId), {
     method: 'get',
   });
   return data;
 };
 
-export function useProjectIssues() {
-  return useQuery('project_issues', getProjectIssues, {
+export function useIssues(projectId) {
+  return useQuery('issues', () => getIssues(projectId), {
     onError: () => {
       addMessage('Failed to fetch issues, please try again.', constants.MESSAGE_TYPE_ERROR);
     },
   });
 }
 
-const getSprintIssues = async (key, id) => {
-  const { data } = await request(replace(constants.SPRINT_ISSUES_URL, id), {
+const getIssue = async (id, projectId) => {
+  const { data } = await request(`${replace(constants.ISSUE_URL, projectId)}${id}/`, {
     method: 'get',
   });
   return data;
 };
 
-export function useSprintIssues() {
-  return useQuery('sprint_issues', getSprintIssues, {
+export function useSprint(id, projectId, enabled = true) {
+  return useQuery(['issue', id], () => getIssue(id, projectId), {
+    enabled,
     onError: () => {
-      addMessage('Failed to fetch issues, please try again.', constants.MESSAGE_TYPE_ERROR);
+      addMessage('Failed to fetch issue, please try again.', constants.MESSAGE_TYPE_ERROR);
     },
   });
 }
 
-const saveIssue = async (variables) => {
+const saveIssue = async (projectId, variables) => {
   let method = 'post';
-  let url = constants.ISSUE_URL;
+  let url = replace(constants.ISSUE_URL, projectId);
   if (variables.id) {
     method = 'put';
     url += `${variables.id}/`;
@@ -54,8 +55,7 @@ export function useSaveIssue() {
   return useMutation(saveIssue, {
     onSuccess: async (data) => {
       await queryClient.setQueryData(['issue', { id: data.id }], data);
-      await queryClient.invalidateQueries('project_issues');
-      await queryClient.invalidateQueries('sprint_issues');
+      await queryClient.invalidateQueries('issues');
       addMessage(`Issue ${data.name} saved successfully`, constants.MESSAGE_TYPE_SUCCESS);
     },
     onError: () => {
