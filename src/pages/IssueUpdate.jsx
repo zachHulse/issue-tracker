@@ -9,7 +9,7 @@ import SprintSelect from '../components/fields/SprintSelect';
 
 const HeaderElement = ({ item }) => <Typography variant="h2">Issue {item.name}</Typography>;
 
-const SprintUpdate = () => {
+const IssueUpdate = () => {
   const fields = {
     name: {},
     project_id: {
@@ -31,4 +31,4 @@ HeaderElement.propTypes = {
   item: propTypes.shape(Sprint).isRequired,
 };
 
-export default SprintUpdate;
+export default IssueUpdate;

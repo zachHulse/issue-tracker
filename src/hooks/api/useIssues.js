@@ -37,7 +37,7 @@ export function useSprintIssues() {
 
 const saveIssue = async (variables) => {
   let method = 'post';
-  let url = constants.PROJECT_ISSUES_URL;
+  let url = constants.ISSUE_URL;
   if (variables.id) {
     method = 'put';
     url += `${variables.id}/`;
