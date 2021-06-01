@@ -3,7 +3,7 @@ import React from 'react';
 import { Button, Container, Grid, makeStyles, Typography } from '@material-ui/core';
 import { Link, useParams } from 'react-location';
 import { AddCircle } from '@material-ui/icons';
-import useProjectIssues from '../hooks/api/useIssues';
+import { useProjectIssues } from '../hooks/api/useIssues';
 import DataTable from '../components/DataTable';
 import { useProject } from '../hooks/api/useProjects';
 
