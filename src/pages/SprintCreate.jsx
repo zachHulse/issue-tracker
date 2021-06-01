@@ -3,10 +3,12 @@ import { Typography } from '@material-ui/core';
 import { useParams } from 'react-location';
 import SaveView from './generic/SaveView';
 import { useSprint, useSprintSave } from '../hooks/api/useSprints';
+import { useProject } from '../hooks/api/useProjects';
 
 const SprintCreate = () => {
   const params = useParams();
-  const HeaderElement = () => <Typography variant="h2">Create Sprint</Typography>;
+  const { data = {} } = useProject(params.project_id);
+  const HeaderElement = () => <Typography variant="h2">Create Sprint for {data.name}</Typography>;
   const fields = {
     start: { type: 'date' },
     finish: { type: 'date' },
