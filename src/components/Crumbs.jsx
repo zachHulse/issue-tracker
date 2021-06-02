@@ -11,7 +11,7 @@ const Crumbs = () => {
   return (
     <Breadcrumbs separator={<NavigateNext />}>
       {partials.map((part, index) => (
-        <Link to={partials.slice(0, index + 1).join('/')}>
+        <Link key={part} to={partials.slice(0, index + 1).join('/')}>
           <Typography variant="h5" color="textSecondary">
             {title(part)}
           </Typography>

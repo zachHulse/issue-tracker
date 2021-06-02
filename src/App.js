@@ -3,7 +3,7 @@ import React from 'react';
 import './App.css';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Navigate, ReactLocation, Route, Routes } from 'react-location';
-import { AppBar, Container, makeStyles, Toolbar, Typography } from '@material-ui/core';
+import { Container, Typography } from '@material-ui/core';
 import * as propTypes from 'prop-types';
 import Login from './pages/Login';
 import Messages from './components/Messages';
@@ -17,23 +17,10 @@ import SprintUpdate from './pages/SprintUpdate';
 import Sprints from './pages/Sprints';
 import IssueCreate from './pages/IssueCreate';
 import IssueUpdate from './pages/IssueUpdate';
-import Crumbs from './components/Crumbs';
+import AppMenu from './components/AppMenu';
 
 // Create a client
 const queryClient = new QueryClient();
-const useStyles = makeStyles((theme) => ({
-  menuItem: {
-    '&:hover': {
-      opacity: 0.3,
-    },
-  },
-  menuLink: {
-    textDecoration: 'none',
-  },
-  menuBar: {
-    marginBottom: theme.spacing(3),
-  },
-}));
 
 const Page404 = () => (
   <Container>
@@ -43,10 +30,9 @@ const Page404 = () => (
 
 function App() {
   const { session } = useSession();
-  const classes = useStyles();
 
   const PrivateRoute = ({ path, Element }) => (
-    <Route {...{ path }} element={session.token ? <Element /> : <Navigate to="login" />} />
+    <Route {...{ path }} element={session.token ? <Element /> : <Navigate to="/login" />} />
   );
 
   PrivateRoute.propTypes = {
@@ -56,13 +42,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ReactLocation>
-        {session.token && (
-          <AppBar position="static" color="transparent" className={classes.menuBar}>
-            <Toolbar>
-              <Crumbs />
-            </Toolbar>
-          </AppBar>
-        )}
+        <AppMenu />
         <Routes>
           <PrivateRoute path="/" Element={Home} />
           <PrivateRoute path="projects" Element={Home} />

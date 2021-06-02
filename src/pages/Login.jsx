@@ -12,7 +12,7 @@ const Login = () => {
 
   const login = async (credentials) => {
     await mutate(credentials);
-    navigate('/');
+    await navigate('/projects');
   };
 
   return (

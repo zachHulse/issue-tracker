@@ -33,7 +33,7 @@ const Home = () => {
       </Typography>
       <Grid container spacing={5}>
         {data.map((project) => (
-          <Grid item lg>
+          <Grid item lg key={project.id}>
             <Card raised>
               <Link to={`/projects/${project.id}`} className={classes.link}>
                 <CardActionArea>
