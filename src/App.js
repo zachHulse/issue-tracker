@@ -2,8 +2,8 @@ import React from 'react';
 
 import './App.css';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { Link, Navigate, ReactLocation, Route, Routes } from 'react-location';
-import { AppBar, Container, Grid, makeStyles, Toolbar, Typography } from '@material-ui/core';
+import { Navigate, ReactLocation, Route, Routes } from 'react-location';
+import { AppBar, Container, makeStyles, Toolbar, Typography } from '@material-ui/core';
 import * as propTypes from 'prop-types';
 import Login from './pages/Login';
 import Messages from './components/Messages';
@@ -17,6 +17,7 @@ import SprintUpdate from './pages/SprintUpdate';
 import Sprints from './pages/Sprints';
 import IssueCreate from './pages/IssueCreate';
 import IssueUpdate from './pages/IssueUpdate';
+import Crumbs from './components/Crumbs';
 
 // Create a client
 const queryClient = new QueryClient();
@@ -58,29 +59,7 @@ function App() {
         {session.token && (
           <AppBar position="static" color="transparent" className={classes.menuBar}>
             <Toolbar>
-              <Grid container spacing={2}>
-                <Grid item className={classes.menuItem}>
-                  <Link to="/" className={classes.menuLink}>
-                    <Typography variant="h4" color="textSecondary">
-                      Home
-                    </Typography>
-                  </Link>
-                </Grid>
-                <Grid item className={classes.menuItem}>
-                  <Link to="projects" className={classes.menuLink}>
-                    <Typography variant="h4" color="textSecondary">
-                      Projects
-                    </Typography>
-                  </Link>
-                </Grid>
-                <Grid item className={classes.menuItem}>
-                  <Link to="sprints" className={classes.menuLink}>
-                    <Typography variant="h4" color="textSecondary">
-                      Sprints
-                    </Typography>
-                  </Link>
-                </Grid>
-              </Grid>
+              <Crumbs />
             </Toolbar>
           </AppBar>
         )}
@@ -90,11 +69,11 @@ function App() {
           <PrivateRoute path="projects/:project_id/issues" Element={Issues} />
           <PrivateRoute path="projects/create" Element={ProjectCreate} />
           <PrivateRoute path="projects/:project_id/issues/create" Element={IssueCreate} />
-          <PrivateRoute path="projects/:project_id/issues/:id/update" Element={IssueUpdate} />
-          <PrivateRoute path="projects/:id/update" Element={ProjectUpdate} />
+          <PrivateRoute path="projects/:project_id/issues/:id" Element={IssueUpdate} />
+          <PrivateRoute path="projects/:id" Element={ProjectUpdate} />
           <PrivateRoute path="projects/:project_id/sprints" Element={Sprints} />
           <PrivateRoute path="projects/:project_id/sprints/create" Element={SprintCreate} />
-          <PrivateRoute path="projects/:project_id/sprints/:id/update" Element={SprintUpdate} />
+          <PrivateRoute path="projects/:project_id/sprints/:id" Element={SprintUpdate} />
           <Route path="login" element={<Login />} />
           <PrivateRoute path="*" Element={Page404} />
         </Routes>

@@ -45,8 +45,8 @@ const HeaderElement = ({ item }) => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={() => navigate('../sprints')}>Sprints</MenuItem>
-        <MenuItem onClick={() => navigate('../issues')}>Issues</MenuItem>
+        <MenuItem onClick={() => navigate('./sprints')}>Sprints</MenuItem>
+        <MenuItem onClick={() => navigate('./issues')}>Issues</MenuItem>
       </Menu>
     </Grid>
   );

@@ -44,7 +44,7 @@ const DataTable = ({ useData, displayKeys, rowLink, formattedCells }) => {
               {displayKeys.map((key) => getCell(key, item))}
               {rowLink && (
                 <StyledTableCell>
-                  <Link to={`${item.id}/update`}>
+                  <Link to={`${item.id}`}>
                     <IconButton>
                       <Edit />
                     </IconButton>

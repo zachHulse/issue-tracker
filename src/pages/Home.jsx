@@ -35,7 +35,7 @@ const Home = () => {
         {data.map((project) => (
           <Grid item lg>
             <Card raised>
-              <Link to={`projects/${project.id}/update`} className={classes.link}>
+              <Link to={`/projects/${project.id}`} className={classes.link}>
                 <CardActionArea>
                   <CardContent className={classes.item}>
                     <Typography gutterBottom variant="h5" component="h2" align="center">
