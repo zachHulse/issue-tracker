@@ -7,11 +7,11 @@ let session = {
 };
 let listeners = [];
 
-export const setSession = (token, email, isAdmin) => {
+export const setSession = async (token, email, isAdmin) => {
   session = { token, email, isAdmin };
-  localStorage.setItem('token', token);
-  localStorage.setItem('email', email);
-  localStorage.setItem('isAdmin', isAdmin);
+  await localStorage.setItem('token', token);
+  await localStorage.setItem('email', email);
+  await localStorage.setItem('isAdmin', isAdmin);
   listeners.forEach((listener) => listener(session));
 };
 

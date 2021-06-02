@@ -16,7 +16,7 @@ const login = async (credentials) => {
 export default function useLogin() {
   return useMutation(login, {
     onSuccess: async (data, variables) => {
-      setSession(data.token, variables.email, data.isAdmin);
+      await setSession(data.token, variables.email, data.isAdmin);
     },
     onError: () => {
       addMessage('Login failed, please try again.', constants.MESSAGE_TYPE_ERROR);
