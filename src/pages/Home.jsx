@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  Button,
   Card,
   CardActionArea,
   CardContent,
@@ -9,7 +10,9 @@ import {
   Typography,
 } from '@material-ui/core';
 import { Link } from 'react-location';
+import { AddCircle } from '@material-ui/icons';
 import useProjects from '../hooks/api/useProjects';
+import useSession from '../hooks/useSession';
 
 const useStyles = makeStyles(() => ({
   link: {
@@ -23,6 +26,7 @@ const useStyles = makeStyles(() => ({
 const Home = () => {
   const { data = [] } = useProjects();
   const classes = useStyles();
+  const { session } = useSession();
   return (
     <Container>
       <Typography variant="h2" color="textSecondary" align="center" gutterBottom>
@@ -51,6 +55,13 @@ const Home = () => {
           </Grid>
         ))}
       </Grid>
+      {session.isAdmin && (
+        <Link to="/projects/create" className={classes.link}>
+          <Button variant="contained" color="default" startIcon={<AddCircle />} fullWidth>
+            Create Project
+          </Button>
+        </Link>
+      )}
     </Container>
   );
 };
