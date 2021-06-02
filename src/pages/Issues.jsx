@@ -16,6 +16,7 @@ const Issues = () => {
   const params = useParams();
   return (
     <ListView
+      canAdd
       modelName="issue"
       displayKeys={['project', 'name', 'code', 'story_points']}
       formattedCells={{ project: ProjectCell }}

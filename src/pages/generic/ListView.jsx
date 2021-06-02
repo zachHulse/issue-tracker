@@ -13,18 +13,20 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const ListView = ({ modelName, displayKeys, useData, formattedCells }) => {
+const ListView = ({ modelName, displayKeys, useData, formattedCells, canAdd }) => {
   const classes = useStyles();
   return (
     <Container>
       <Typography variant="h2">{`${title(modelName)}s`}</Typography>
       <Grid container justify="flex-end">
         <Grid item>
-          <Link to="create" className={classes.link}>
-            <Button variant="contained" color="default" startIcon={<AddCircle />}>
-              Create {modelName}
-            </Button>
-          </Link>
+          {canAdd && (
+            <Link to="create" className={classes.link}>
+              <Button variant="contained" color="default" startIcon={<AddCircle />}>
+                Create {modelName}
+              </Button>
+            </Link>
+          )}
         </Grid>
       </Grid>
       <DataTable {...{ displayKeys, useData, formattedCells }} />
@@ -33,12 +35,14 @@ const ListView = ({ modelName, displayKeys, useData, formattedCells }) => {
 };
 
 ListView.propTypes = {
+  canAdd: propTypes.bool,
   displayKeys: propTypes.arrayOf(propTypes.string).isRequired,
   formattedCells: propTypes.objectOf(propTypes.func),
   modelName: propTypes.string.isRequired,
   useData: propTypes.func.isRequired,
 };
 ListView.defaultProps = {
+  canAdd: false,
   formattedCells: {},
 };
 
