@@ -7,10 +7,12 @@ import SaveView from './generic/SaveView';
 import Sprint from '../types/sprint';
 import { useProject } from '../hooks/api/useProjects';
 import { isoToStandardDate } from '../string';
+import useSession from '../hooks/useSession';
 
 const SprintUpdate = () => {
   const params = useParams();
   const { data = {} } = useProject(params.project_id);
+  const { session } = useSession();
 
   const HeaderElement = ({ item }) => (
     <Typography variant="h2">
@@ -30,6 +32,7 @@ const SprintUpdate = () => {
     <SaveView
       useItem={(id, enabled) => useSprint(id, params.id, enabled)}
       useSaveItem={() => useSprintSave(params.project_id)}
+      disabled={!session.isAdmin}
       {...{ HeaderElement, fields }}
     />
   );

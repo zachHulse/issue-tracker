@@ -6,6 +6,7 @@ import { useNavigate } from 'react-location';
 import { useProject, useProjectSave } from '../hooks/api/useProjects';
 import SaveView from './generic/SaveView';
 import Project from '../types/project';
+import useSession from '../hooks/useSession';
 
 const useStyles = makeStyles(() => ({
   btn: {
@@ -58,9 +59,15 @@ const ProjectUpdate = () => {
     description: {},
     abbreviation: {},
   };
+  const { session } = useSession();
 
   return (
-    <SaveView useItem={useProject} useSaveItem={useProjectSave} {...{ HeaderElement, fields }} />
+    <SaveView
+      useItem={useProject}
+      useSaveItem={useProjectSave}
+      disabled={!session.isAdmin}
+      {...{ HeaderElement, fields }}
+    />
   );
 };
 

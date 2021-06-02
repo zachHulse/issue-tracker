@@ -5,7 +5,7 @@ import { useNavigate } from 'react-location';
 import * as propTypes from 'prop-types';
 import RegisteredTextField from './fields/RegisteredTextField';
 
-const ItemSave = ({ item, fields, useSaveItem }) => {
+const ItemSave = ({ item, fields, useSaveItem, disabled }) => {
   const { register, handleSubmit } = useForm({
     defaultValues: { ...item },
   });
@@ -41,7 +41,13 @@ const ItemSave = ({ item, fields, useSaveItem }) => {
               </Grid>
             </Grid>
             <Grid item xs={12}>
-              <Button color="primary" fullWidth type="submit" variant="contained">
+              <Button
+                color="primary"
+                fullWidth
+                type="submit"
+                variant="contained"
+                disabled={disabled}
+              >
                 Submit
               </Button>
             </Grid>
@@ -53,6 +59,7 @@ const ItemSave = ({ item, fields, useSaveItem }) => {
 };
 
 ItemSave.propTypes = {
+  disabled: propTypes.bool,
   fields: propTypes.objectOf(
     propTypes.shape({
       type: propTypes.string,
@@ -63,6 +70,7 @@ ItemSave.propTypes = {
   useSaveItem: propTypes.func.isRequired,
 };
 ItemSave.defaultProps = {
+  disabled: false,
   item: {},
 };
 
