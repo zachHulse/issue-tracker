@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  Box,
   Button,
   Card,
   CardActionArea,
@@ -55,13 +56,15 @@ const Home = () => {
           </Grid>
         ))}
       </Grid>
-      {session.isAdmin && (
-        <Link to="/projects/create" className={classes.link}>
-          <Button variant="contained" color="default" startIcon={<AddCircle />} fullWidth>
-            Create Project
-          </Button>
-        </Link>
-      )}
+      <Box mt={5}>
+        {session.isAdmin && (
+          <Link to="/projects/create" className={classes.link}>
+            <Button variant="contained" color="default" startIcon={<AddCircle />} fullWidth>
+              Create Project
+            </Button>
+          </Link>
+        )}
+      </Box>
     </Container>
   );
 };
